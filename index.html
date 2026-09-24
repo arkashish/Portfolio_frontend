@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Arkashish's Portfolio</title>
+<style>
+:root{
+  --acc:#0067c0; --win:rgba(243,243,243,.92); --txt:#1b1b1b; --sub:#5c5c5c; --line:rgba(0,0,0,.09);
+  --bar:rgba(243,243,243,.82); --card:#fff;
+  font-family:"Segoe UI Variable","Segoe UI",system-ui,-apple-system,Roboto,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--win:rgba(32,32,32,.94);--txt:#f3f3f3;--sub:#a8a8a8;--line:rgba(255,255,255,.1);--bar:rgba(28,28,28,.8);--card:#2b2b2b;--acc:#60cdff}
+}
+*{box-sizing:border-box;margin:0}
+html,body{height:100%;overflow:hidden;color:var(--txt)}
+body{
+  background:
+    radial-gradient(60% 70% at 62% 58%,#5fb0ff 0,transparent 60%),
+    radial-gradient(45% 60% at 78% 40%,#2a5bd7 0,transparent 65%),
+    radial-gradient(50% 60% at 35% 70%,#0a2a8a 0,transparent 70%),
+    linear-gradient(135deg,#dbe9ff,#7aa7ff 40%,#0b2a86);
+}
+body::before{ /* Windows 11 bloom petal */
+  content:"";position:fixed;inset:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 22% 55% at 52% 50%,rgba(255,255,255,.55),transparent 70%),
+    radial-gradient(ellipse 30% 40% at 58% 62%,rgba(20,60,200,.55),transparent 70%);
+  transform:rotate(-28deg) scale(1.2);filter:blur(8px);
+}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+
+/* Desktop icons */
+#desk{position:fixed;inset:0 0 48px 0;padding:12px;display:grid;grid-auto-flow:column;grid-template-rows:repeat(auto-fill,88px);grid-auto-columns:88px;gap:4px;justify-content:start}
+.ic{width:84px;padding:6px 2px;border-radius:6px;display:flex;flex-direction:column;align-items:center;gap:4px;color:#fff;font-size:12px;text-align:center;text-shadow:0 1px 3px rgba(0,0,0,.7);line-height:1.2}
+.ic:hover,.ic:focus-visible{background:rgba(255,255,255,.18);outline:1px solid rgba(255,255,255,.35);outline-offset:-1px}
+.ic svg{width:44px;height:44px;filter:drop-shadow(0 2px 3px rgba(0,0,0,.35))}
+
+#hello{position:fixed;left:50%;top:38%;transform:translate(-50%,-50%);color:#fff;text-align:center;text-shadow:0 2px 14px rgba(0,20,90,.5);pointer-events:none;width:90%}
+#hello p{font-size:clamp(15px,2vw,20px);font-weight:300}
+#hello h1{font-size:clamp(40px,8vw,88px);font-weight:600;letter-spacing:-.02em;line-height:1.05}
+
+/* Windows */
+.win{position:fixed;background:var(--win);backdrop-filter:blur(30px) saturate(1.4);border:1px solid var(--line);border-radius:8px;box-shadow:0 12px 40px rgba(0,0,0,.35);display:flex;flex-direction:column;overflow:hidden;min-width:300px;animation:pop .14s ease-out}
+@keyframes pop{from{opacity:0;transform:scale(.96)}}
+.tb{height:38px;display:flex;align-items:center;padding-left:12px;font-size:12px;cursor:default;user-select:none;flex:none}
+.tb span{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tb button{width:46px;height:38px;font-size:13px}
+.tb button:hover{background:rgba(128,128,128,.22)}
+.tb .x:hover{background:#c42b1c;color:#fff}
+.body{flex:1;overflow:auto;padding:4px 20px 20px;font-size:14px;line-height:1.55}
+.body h2{font-size:20px;font-weight:600;margin:6px 0 2px}
+.body h3{font-size:15px;font-weight:600;margin:16px 0 2px}
+.body p,.body li{color:var(--sub)}
+.body ul{padding-left:18px}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.tags b{font-weight:400;font-size:12px;padding:2px 10px;border-radius:99px;background:var(--card);border:1px solid var(--line);color:var(--txt)}
+.body a{color:var(--acc)}
+.row{display:flex;justify-content:space-between;gap:12px;align-items:baseline}
+
+/* Chat */
+#chat .body{display:flex;flex-direction:column;gap:8px;padding:8px 14px}
+.m{max-width:86%;padding:8px 12px;border-radius:10px;font-size:14px;line-height:1.45;white-space:pre-wrap;overflow-wrap:anywhere}
+.m.u{align-self:flex-end;background:var(--acc);color:#fff}
+.m.b{align-self:flex-start;background:var(--card);border:1px solid var(--line);color:var(--txt)}
+.dots i{display:inline-block;width:6px;height:6px;margin-right:3px;border-radius:50%;background:var(--sub);animation:bl 1s infinite}
+.dots i:nth-child(2){animation-delay:.15s}.dots i:nth-child(3){animation-delay:.3s}
+@keyframes bl{50%{opacity:.25}}
+.chips{display:flex;flex-wrap:wrap;gap:6px;padding:0 14px 8px}
+.chips button{font-size:12px;padding:4px 10px;border-radius:99px;border:1px solid var(--line);background:var(--card)}
+.chips button:hover{border-color:var(--acc)}
+#f{display:flex;gap:8px;padding:10px 14px;border-top:1px solid var(--line)}
+#q{flex:1;padding:9px 12px;border-radius:6px;border:1px solid var(--line);border-bottom:2px solid var(--acc);background:var(--card);color:var(--txt);font:inherit;font-size:14px}
+#f button{padding:0 16px;border-radius:6px;background:var(--acc);color:#fff}
+@media (prefers-color-scheme:dark){#f button{color:#000}.m.u{color:#000}}
+
+/* Taskbar */
+#tk{position:fixed;left:0;right:0;bottom:0;height:48px;background:var(--bar);backdrop-filter:blur(30px) saturate(1.5);border-top:1px solid var(--line);display:flex;align-items:center;justify-content:center;gap:4px;z-index:9999}
+.t{position:relative;height:40px;min-width:40px;padding:0 8px;border-radius:6px;display:flex;align-items:center;justify-content:center;gap:8px}
+.t:hover{background:rgba(128,128,128,.2)}
+.t svg{width:22px;height:22px}
+.t.on::after{content:"";position:absolute;bottom:1px;left:50%;width:8px;height:3px;margin-left:-4px;border-radius:2px;background:var(--acc)}
+.ask{background:linear-gradient(135deg,#0067c0,#7a4dff);color:#fff;padding:0 14px;font-size:13px;font-weight:600;margin-left:6px}
+.ask:hover{background:linear-gradient(135deg,#0a78dd,#8b63ff)}
+#clk{position:absolute;right:12px;font-size:12px;text-align:right;line-height:1.25;color:var(--txt)}
+
+/* Start menu */
+#st{position:fixed;left:50%;bottom:58px;transform:translateX(-50%);width:min(560px,96vw);background:var(--win);backdrop-filter:blur(40px) saturate(1.5);border:1px solid var(--line);border-radius:10px;box-shadow:0 12px 40px rgba(0,0,0,.35);padding:22px 26px;z-index:9998;display:none}
+#st.show{display:block;animation:pop .14s ease-out}
+#st h4{font-size:13px;font-weight:600;margin-bottom:10px}
+#st .g{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:18px}
+#st .g button{padding:12px 6px;border-radius:6px;font-size:12px;display:flex;flex-direction:column;align-items:center;gap:6px}
+#st .g button:hover{background:rgba(128,128,128,.2)}
+#st .g svg{width:32px;height:32px}
+
+@media (max-width:640px){.win{left:0!important;top:0!important;width:100%!important;height:calc(100% - 48px)!important;border-radius:0}#clk{display:none}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute">
+  <symbol id="fd" viewBox="0 0 48 48"><path d="M4 12a4 4 0 0 1 4-4h10l4 4h18a4 4 0 0 1 4 4v22a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4z" fill="#f6c443"/><path d="M4 18h40v20a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4z" fill="#ffd964"/></symbol>
+  <symbol id="pf" viewBox="0 0 48 48"><path d="M10 4h20l10 10v28a2 2 0 0 1-2 2H10a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z" fill="#fff"/><path d="M30 4v10h10z" fill="#d0d0d0"/><rect x="13" y="24" width="22" height="10" rx="2" fill="#e5322d"/><text x="24" y="32" font-size="7" font-weight="700" fill="#fff" text-anchor="middle" font-family="Segoe UI,sans-serif">PDF</text></symbol>
+  <symbol id="ct" viewBox="0 0 48 48"><rect x="6" y="10" width="36" height="28" rx="4" fill="#0067c0"/><path d="M8 14l16 12 16-12" stroke="#fff" stroke-width="3" fill="none"/></symbol>
+  <symbol id="ab" viewBox="0 0 48 48"><circle cx="24" cy="24" r="19" fill="#0067c0"/><circle cx="24" cy="18" r="6" fill="#fff"/><path d="M12 36c2-8 8-10 12-10s10 2 12 10z" fill="#fff"/></symbol>
+  <symbol id="sp" viewBox="0 0 24 24"><path d="M12 2l2.2 6.3L21 10l-6.8 1.7L12 18l-2.2-6.3L3 10l6.8-1.7zM19 15l1 2.5 2.5 1-2.5 1-1 2.5-1-2.5-2.5-1 2.5-1z" fill="currentColor"/></symbol>
+</svg>
+
+<main id="desk"></main>
+<div id="hello"><p>Hey, I'm Arkashish! Welcome to my</p><h1>Portfolio</h1></div>
+
+<div id="st">
+  <h4>Pinned</h4><div class="g" id="pin"></div>
+  <div class="row"><span style="font-size:13px">Arkashish Sutradhar</span><button class="t" onclick="openApp('resume');tog(0)" style="font-size:12px;height:32px">Open resume</button></div>
+</div>
+
+<nav id="tk">
+  <button class="t" id="sb" aria-label="Start" title="Start"><svg viewBox="0 0 24 24"><path d="M2 4l9-1.3V11H2zm10-1.5L22 1v10H12zM2 13h9v8.3L2 20zm10 0h10v10l-10-1.5z" fill="#0078d4"/></svg></button>
+  <button class="t" onclick="openApp('about')" title="About me"><svg><use href="#ab"/></svg></button>
+  <button class="t" onclick="openApp('projects')" title="Projects"><svg><use href="#fd"/></svg></button>
+  <button class="t" onclick="openApp('resume')" title="Resume"><svg><use href="#pf"/></svg></button>
+  <button class="t" onclick="openApp('contact')" title="Contact"><svg><use href="#ct"/></svg></button>
+  <button class="t ask" id="askb" title="Ask me anything about Arkashish"><svg style="color:#fff"><use href="#sp"/></svg>Ask Me</button>
+  <div id="clk"></div>
+</nav>
+
+<script>
+// ====== CONFIG ======
+const API_URL = "https://portfolio-backend-mvec.onrender.com";   // FastAPI server
+
+const RESUME_PDF = "my_resume.pdf";       
+const LINKS = { linkedin:"https://www.linkedin.com/in/arkashish-sutradhar/", github:"https://github.com/arkashish", leetcode:"https://leetcode.com/u/CodeDebugger09/" };
+
+// ====== CONTENT (from resume) ======
+const tags = a => `<div class="tags">${a.map(t=>`<b>${t}</b>`).join("")}</div>`;
+const APPS = {
+  about:{t:"About me",w:520,h:520,i:"ab",html:()=>`
+    <h2>Arkashish Sutradhar</h2><p>Software Engineer, AI products and full-stack</p>
+    <p style="margin-top:10px">2+ years shipping production GenAI systems and full-stack apps for enterprise users. Built two RAG agents on Microsoft Copilot Studio that client teams use daily, cutting analysis and ticket-resolution time from hours to minutes.</p>
+    <h3>Experience</h3><div class="row"><b>Software Developer, TCS</b><span style="color:var(--sub);font-size:12px">Oct 2023 – Present</span></div>
+    <ul><li>CSV Analyzer Agent: answers grounded in uploaded CSVs, with auto-generated charts.</li>
+    <li>Ticket Resolution Agent (Ivanti): surfaces similar past tickets and resolutions.</li>
+    <li>Multi-agent insurance comparison system, shown at the TCS AI Hackathon.</li>
+    <li>Optimized PeopleSoft HCM batch jobs by 40%; automated 20+ QA cases in CI/CD.</li></ul>
+    <h3>Skills</h3>${tags(["LLMs","Copilot Studio","LangChain","RAG","Multi-agent","Python","JavaScript","Java","React","Next.js","Node.js","Spring Boot","MongoDB","MySQL","AWS","Docker"])}
+    <h3>Education</h3><p>B.Tech. Computer Science, Heritage Institute of Technology, Kolkata (2019–2023), 9.1 DGPA</p>
+    <h3>Achievements</h3><p>LeetCode peak rating 2030 (Global Rank 570), 1,500+ problems solved. Outstanding Contribution Award ×2 at TCS.</p>`},
+  contact:{t:"Contact",w:420,h:330,i:"ct",html:()=>`
+    <h2>Get in touch</h2><p>Kolkata, India</p>
+    <ul style="list-style:none;padding:0;margin-top:12px;line-height:2">
+    <li><a href="mailto:arkashish.sutradhar@gmail.com">arkashish.sutradhar@gmail.com</a></li>
+    <li><a href="tel:+919830679643">+91-9830679643</a></li>
+    <li><a href="${LINKS.linkedin}" target="_blank" rel="noopener">LinkedIn</a></li>
+    <li><a href="${LINKS.github}" target="_blank" rel="noopener">GitHub</a></li>
+    <li><a href="${LINKS.leetcode}" target="_blank" rel="noopener">LeetCode</a></li></ul>`},
+  resume:{t:"Resume.pdf",w:760,h:600,i:"pf",html:()=>`
+    <object data="${RESUME_PDF}" type="application/pdf" style="width:100%;height:100%;min-height:440px;border-radius:6px">
+    <p>Your browser can't preview PDFs. <a href="${RESUME_PDF}" download>Download the resume</a>.</p></object>`},
+  projects:{t:"Projects",w:600,h:520,i:"fd",html:()=>`
+    <h2>Projects</h2><p>Open a folder on the desktop, or browse them here.</p>
+    ${Object.entries(PROJ).map(([k,p])=>`<h3><a href="#" onclick="openApp('${k}');return false">${p.t}</a></h3><p>${p.s}</p>`).join("")}`},
+};
+const PROJ = {
+  insurance:{t:"Insurance Policy Comparator",s:"Multi-agent pipeline that extracts and compares insurance policies into structured summaries.",st:["DeepSeek v2","GPT-4o-mini","LangChain","Streamlit","Python"]},
+  meet:{t:"Google Meet Clone",s:"Full-stack video conferencing with real-time audio/video, Google OAuth and role-based controls.",st:["Next.js","ZegoCloud","NextAuth","MongoDB","Tailwind","Radix UI"]},
+  food:{t:"FoodApp",s:"Food-ordering platform with cart, menu pagination, admin dashboard, JWT auth and Google Sign-In. Stripe checkout with a 99% payment success rate.",st:["React","Next.js","Express","MongoDB","Firebase","Stripe"]},
+  screener:{t:"AI Resume Screener",s:"Parses PDF/DOCX resumes and JDs into schema-validated JSON via LLM extraction, then scores and ranks candidates in a second LLM stage. About 60% ranking accuracy on a labelled test set so far.",st:["Python","Groq","Pydantic","pypdf","python-docx"]},
+};
+for(const [k,p] of Object.entries(PROJ)) APPS[k]={t:p.t,w:480,h:340,i:"fd",html:()=>`<h2>${p.t}</h2><p style="margin-top:6px">${p.s}</p>${tags(p.st)}`};
+
+// ====== DESKTOP ======
+const $=s=>document.querySelector(s);
+const ico=[["resume","pf","Resume.pdf"],["about","ab","About Me"],["insurance","fd","Insurance Comparator"],["meet","fd","Google Meet Clone"],["food","fd","FoodApp"],["screener","fd","AI Resume Screener"],["contact","ct","Contact"]];
+$("#desk").innerHTML=ico.map(([k,i,l])=>`<button class="ic" ondblclick="openApp('${k}')" onclick="if(matchMedia('(hover:none)').matches)openApp('${k}')" onkeydown="if(event.key==='Enter')openApp('${k}')"><svg><use href="#${i}"/></svg>${l}</button>`).join("");
+$("#pin").innerHTML=[["about","ab","About"],["projects","fd","Projects"],["resume","pf","Resume"],["contact","ct","Contact"],["chat","sp","Ask Me"]].map(([k,i,l])=>`<button onclick="openApp('${k}');tog(0)"><svg><use href="#${i}"/></svg>${l}</button>`).join("");
+
+// ====== WINDOW MANAGER ======
+let z=10, open={};
+function openApp(k){
+  if(k==="chat") return openChat();
+  if(open[k]){focus(open[k]);return}
+  const a=APPS[k], n=Object.keys(open).length;
+  const w=mk(k,a.t,a.w,a.h,n,a.html());
+}
+function mk(k,title,W,H,n,html){
+  const el=document.createElement("div");el.className="win";
+  const mobile=innerWidth<=640;
+  el.style.width=Math.min(W,innerWidth-20)+"px";el.style.height=Math.min(H,innerHeight-80)+"px";
+  el.style.left=Math.max(10,(innerWidth-W)/2+n*28-40)+"px";el.style.top=Math.max(10,(innerHeight-H)/3+n*28)+"px";
+  el.innerHTML=`<div class="tb"><span>${title}</span><button class="mn" aria-label="Minimize">&#8211;</button><button class="x" aria-label="Close">&#10005;</button></div><div class="body">${html}</div>`;
+  document.body.appendChild(el);open[k]=el;focus(el);
+  el.querySelector(".x").onclick=()=>{el.remove();delete open[k]};
+  el.querySelector(".mn").onclick=()=>{el.style.display="none"};
+  el.addEventListener("pointerdown",()=>focus(el));
+  drag(el,el.querySelector(".tb"));
+  return el;
+}
+function focus(el){el.style.display="flex";el.style.zIndex=++z}
+function drag(el,h){
+  h.addEventListener("pointerdown",e=>{
+    if(e.target.tagName==="BUTTON"||innerWidth<=640)return;
+    const dx=e.clientX-el.offsetLeft,dy=e.clientY-el.offsetTop;
+    const mv=ev=>{el.style.left=Math.max(-el.offsetWidth+80,Math.min(innerWidth-80,ev.clientX-dx))+"px";el.style.top=Math.max(0,Math.min(innerHeight-90,ev.clientY-dy))+"px"};
+    const up=()=>{removeEventListener("pointermove",mv);removeEventListener("pointerup",up)};
+    addEventListener("pointermove",mv);addEventListener("pointerup",up);
+  });
+}
+function tog(v){$("#st").classList.toggle("show",v===undefined?undefined:!!v)}
+$("#sb").onclick=e=>{e.stopPropagation();tog()};
+addEventListener("pointerdown",e=>{if(!e.target.closest("#st,#sb"))tog(0)});
+
+// ====== CHATBOT (Ask Me) ======
+let chatEl=null;
+function openChat(){
+  if(open.chat){focus(open.chat);$("#q").focus();return}
+  const el=mk("chat","Ask Me · Arkashish's AI assistant",400,540,1,`
+    <div id="msgs" style="display:flex;flex-direction:column;gap:8px"></div>`);
+  el.id="chat";
+  // restructure: messages scroll, chips + input pinned
+  const body=el.querySelector(".body");
+  el.insertAdjacentHTML("beforeend",`<div class="chips" id="chips"></div><form id="f"><input id="q" autocomplete="off" placeholder="Ask about experience, skills, projects…" aria-label="Your question"><button>Send</button></form>`);
+  el.style.left=Math.max(10,innerWidth-420)+"px";el.style.top=Math.max(10,innerHeight-610)+"px";
+  bot("Hi, I'm an AI assistant that answers from Arkashish's resume. What would you like to know?");
+  $("#chips").innerHTML=["What does he do at TCS?","Which AI projects has he built?","What are his top skills?","What's his education?"].map(s=>`<button type="button">${s}</button>`).join("");
+  $("#chips").onclick=e=>{if(e.target.tagName==="BUTTON")send(e.target.textContent)};
+  $("#f").onsubmit=e=>{e.preventDefault();const v=$("#q").value.trim();if(v)send(v)};
+  $("#q").focus();
+}
+function add(cls,txt){
+  const d=document.createElement("div");d.className="m "+cls;d.textContent=txt;
+  const box=$("#msgs");box.appendChild(d);const b=box.parentElement;b.scrollTop=b.scrollHeight;return d;
+}
+const bot=t=>add("b",t);
+async function send(q){
+  $("#q").value="";$("#chips").style.display="none";add("u",q);
+  const d=add("b","");d.innerHTML='<span class="dots"><i></i><i></i><i></i></span>';
+  const btn=$("#f button");btn.disabled=true;
+  try{
+    const r=await fetch(API_URL+"/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({question:q})});
+    if(!r.ok)throw new Error(r.status);
+    d.textContent=(await r.json()).answer;
+  }catch(e){
+    d.textContent="I couldn't reach the server. Check that the backend is running at "+API_URL+" and that CORS is enabled.";
+  }
+  btn.disabled=false;const b=d.closest(".body");b.scrollTop=b.scrollHeight;$("#q").focus();
+}
+$("#askb").onclick=openChat;
+
+// ====== CLOCK ======
+function clock(){const n=new Date();$("#clk").innerHTML=n.toLocaleTimeString([],{hour:"numeric",minute:"2-digit"})+"<br>"+n.toLocaleDateString()}
+clock();setInterval(clock,20000);
+</script>
+</body>
+</html>
